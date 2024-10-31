@@ -1,3 +1,7 @@
+% BibTeX bibliography style 'key-alpha' overriding labels with 'key'
+  % Copyright (C) 2024 Louis Henkel.
+  % Released under an MIT License, subject to further conditions below.
+  % Based on:
 % BibTeX bibliography style 'alpha-key' enabling overriding labels with 'key'
    % Copyright (C) 2024 by Erik Demaine.
    % Released under an MIT License, subject to further conditions below.
@@ -983,7 +987,7 @@ FUNCTION {author.key.label}
         { author format.lab.names }
       if$
     }
-    { key #3 text.prefix$ }
+    { key }
   if$
 }
 
@@ -998,7 +1002,7 @@ FUNCTION {author.editor.key.label}
         { author format.lab.names }
       if$
     }
-    { key #3 text.prefix$ }
+    { key }
   if$
 }
 
@@ -1013,7 +1017,7 @@ FUNCTION {author.key.organization.label}
         { author format.lab.names }
       if$
     }
-    { key #3 text.prefix$ }
+    { key }
   if$
 }
 
@@ -1028,7 +1032,7 @@ FUNCTION {editor.key.organization.label}
         { editor format.lab.names }
       if$
     }
-    { key #3 text.prefix$ }
+    { key }
   if$
 }
 
@@ -1048,11 +1052,18 @@ FUNCTION {calc.label}
     }
   if$
   duplicate$
-  year field.or.null purify$ #-1 #2 substring$
-  *
-  'label :=
-  year field.or.null purify$ #-1 #4 substring$
-  *
+  key empty$
+    {
+        year field.or.null purify$ #-1 #2 substring$
+        *
+        'label :=
+        year field.or.null purify$ #-1 #4 substring$
+        *
+    }
+    {
+        'label :=
+    }
+  if$
   sortify 'sort.label :=
 }
 
